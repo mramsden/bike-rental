@@ -1,3 +1,5 @@
+import { ProductCard } from './card.js';
+
 export class ProductList extends HTMLElement {
 
     constructor() {
@@ -33,7 +35,7 @@ export class ProductList extends HTMLElement {
 
     _attachCard(product) {
         if (!this._shadow) { return; }
-        const card = document.createElement('product-card');
+        const card = ProductCard.create();
         card.name = product.name;
         card.price = product.price;
         card.description = product.description;
@@ -41,9 +43,7 @@ export class ProductList extends HTMLElement {
     }
 };
 
-if (window && document) {
-    const elementName = 'product-list';
+const elementName = 'product-list';
 
-    ProductList.register = () => window.customElements.define(elementName, ProductList);
-    ProductList.create = () => document.createElement(elementName);
-}
+ProductList.register = () => window.customElements.define(elementName, ProductList);
+ProductList.create = () => document.createElement(elementName);
