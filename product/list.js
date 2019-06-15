@@ -1,5 +1,32 @@
 import { ProductCard } from './card.js';
 
+const style = `
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.card {
+    flex-basis: 25%;
+    max-width: 400px;
+    box-sizing: content-box;
+    margin: 10px 0;
+}
+
+@media all and (max-width: 500px) {
+    :host {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+        border-top: 1px solid #efefef;
+        margin: 0;
+    }
+}
+`;
+
 export class ProductList extends HTMLElement {
 
     constructor() {
@@ -18,6 +45,10 @@ export class ProductList extends HTMLElement {
 
     connectedCallback() {
         this._shadow = this.attachShadow({ mode: 'closed' });
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = style;
+
+        this._shadow.appendChild(styleElement);
         this._refreshProducts();
     }
 
@@ -36,6 +67,7 @@ export class ProductList extends HTMLElement {
     _attachCard(product) {
         if (!this._shadow) { return; }
         const card = ProductCard.create();
+        card.className = 'card';
         card.name = product.name;
         card.price = product.price;
         card.description = product.description;

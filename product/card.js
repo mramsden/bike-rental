@@ -1,6 +1,20 @@
 const style = `
-h1 { font-size: 2rem; }
-h2 { font-size: 1.25rem; }
+:host {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+div h1 {
+    font-size: 2rem;
+    margin: 0 5px;
+}
+div h2 {
+    font-size: 1.25rem;
+    margin: 0 5px;
+}
+div p {
+    margin: 0 5px;
+}
 `;
 
 export class ProductCard extends HTMLElement {
@@ -41,13 +55,13 @@ export class ProductCard extends HTMLElement {
         const styleElement = document.createElement('style');
         styleElement.innerHTML = style;
 
-        const content = document.importNode(template.content, true);
-        content.querySelector('h1').innerText = this.name;
-        content.querySelector('h2').innerText = this.price;
-        content.querySelector('p').innerText = this.description;
+        const card = document.importNode(template.content, true);
+        card.querySelector('h1').innerText = this.name;
+        card.querySelector('h2').innerText = this.price;
+        card.querySelector('p').innerText = this.description;
 
         shadow.appendChild(styleElement);
-        shadow.appendChild(content);
+        shadow.appendChild(card);
     }
 }
 
