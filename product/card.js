@@ -1,5 +1,3 @@
-import { ProductPrice } from './price.js';
-
 const style = `
 :host {
     display: flex;
