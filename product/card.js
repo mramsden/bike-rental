@@ -1,3 +1,5 @@
+import { ProductPrice } from './price.js';
+
 const style = `
 :host {
     display: flex;
@@ -8,7 +10,7 @@ div h1 {
     font-size: 2rem;
     margin: 0 5px;
 }
-div h2 {
+div product-price {
     font-size: 1.25rem;
     margin: 0 5px;
 }
@@ -57,7 +59,7 @@ export class ProductCard extends HTMLElement {
 
         const card = document.importNode(template.content, true);
         card.querySelector('h1').innerText = this.name;
-        card.querySelector('h2').innerText = this.price;
+        card.querySelector('product-price').price = this.price;
         card.querySelector('p').innerText = this.description;
 
         shadow.appendChild(styleElement);

@@ -1,32 +1,47 @@
 [
     {
         "name": "Mountain Bike",
-        "price": "£5.00/hr",
+        "price": {
+            "amount": 500,
+            "exponent": 2,
+            "currency": "gbp"
+        },
         "description": "The classic bike rental option. It's our simplest and most familiar option. Recommended for all levels of cyclist."
     },
     {
         "name": "Commuter",
-        "price": "£5.50/hr",
+        "price": {
+            "amount": 550,
+            "exponent": 2,
+            "currency": "gbp"
+        },
         "description": "Planning to go slightly further? Our folding bike is ideal to take on public transport."
     },
     {
         "name": "E-Bike",
-        "price": "£6.50/hr",
+        "price": {
+            "amount": 650,
+            "exponent": 2,
+            "currency": "gbp"
+        },
         "description": "The latest addition to our fleet. It's like a regular bike but with a battery and a burst of pace when you need it!"
     },
     {
         "name": "Sprinter",
-        "price": "£10.00/hr",
+        "price": {
+            "amount": 1000,
+            "exponent": 2,
+            "currency": "gbp"
+        },
         "description": "Our lightest carbon fibre road bike ever. Use this if you want to get places really quickly!"
     },
     {
         "name": "My first bike",
-        "price": "£3.50/hr",
+        "price": {
+            "amount": 350,
+            "exponent": 2,
+            "currency": "gbp"
+        },
         "description": "The perfect bike for your youngest family members so that everyone can join in on your ride."
-    },
-    {
-        "name": "More bikes!",
-        "price": "",
-        "description": "More bikes will be coming soon!"
     }
 ]
