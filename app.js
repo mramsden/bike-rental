@@ -1,3 +1,5 @@
+import { ProductList } from './product/list.js';
+
 const appElement = document.getElementById('app');
 
 class ProductCard extends HTMLElement {
@@ -52,59 +54,15 @@ class ProductCard extends HTMLElement {
 }
 
 window.customElements.define('product-card', ProductCard);
+ProductList.register();
 
-class ProductCards extends HTMLElement {
+const productList = ProductList.create();
+appElement.appendChild(productList);
 
-    constructor() {
-        super();
-        this._products = [];
-    }
-
-    connectedCallback() {
-        this._shadow = this.attachShadow({ mode: 'closed' });
-        this._refreshProducts();
-    }
-
-    get products() {
-        return this._products || [];
-    }
-
-    set products(products) {
-        this._products = products;
-        this._refreshProducts();
-    }
-
-    _refreshProducts() {
-        if (!this._shadow) { return; }
-        this._removeAllCards();
-        this.products.forEach(product => this._attachCard(product));
-    }
-
-    _removeAllCards() {
-        if (!this._shadow) { return; }
-        const cards = Array.from(this._shadow.querySelectorAll('product-card'));
-        cards.forEach(card => this._shadow.removeChild(card));
-    }
-
-    _attachCard(product) {
-        if (!this._shadow) { return; }
-        const productCard = document.createElement('product-card');
-        productCard.name = product.name;
-        productCard.price = product.price;
-        productCard.description = product.description;
-        this._shadow.appendChild(productCard);
-    }
-}
-
-window.customElements.define('product-cards', ProductCards);
-
-const productCards = document.createElement('product-cards');
-appElement.appendChild(productCards);
-
-(async function() {
+(async function () {
     let response = await fetch('products.json');
-    productCards.products = await response.json();
+    productList.products = await response.json();
 
     response = await fetch('products.json');
-    productCards.products = await response.json();
+    productList.products = await response.json();
 })();
