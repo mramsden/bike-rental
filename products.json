@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Mountain Bike",
+        "price": "£5.00/hr",
+        "description": "The classic bike rental option. It's our simplest and most familiar option. Recommended for all levels of cyclist."
+    },
+    {
+        "name": "E-Bike",
+        "price": "£6.50/hr",
+        "description": "The latest addition to our fleet. It's like a regular bike but with a battery and a burst of pace when you need it!"
+    }
+]
