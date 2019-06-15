@@ -1,3 +1,8 @@
+const style = `
+h1 { font-size: 2rem; }
+h2 { font-size: 1.25rem; }
+`;
+
 export class ProductCard extends HTMLElement {
     
     get name() {
@@ -33,18 +38,15 @@ export class ProductCard extends HTMLElement {
     connectedCallback() {
         const shadow = this.attachShadow({ mode: 'closed' });
         const template = document.getElementById('product-card');
-        const style = document.createElement('style');
-        style.innerHTML = `
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.25rem; }
-        `;
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = style;
 
         const content = document.importNode(template.content, true);
         content.querySelector('h1').innerText = this.name;
         content.querySelector('h2').innerText = this.price;
         content.querySelector('p').innerText = this.description;
 
-        shadow.appendChild(style);
+        shadow.appendChild(styleElement);
         shadow.appendChild(content);
     }
 }
