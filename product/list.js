@@ -21,6 +21,7 @@ const style = `
 
     .card {
         width: 100%;
+        max-width: none;
         border-top: 1px solid #efefef;
         margin: 0;
     }
