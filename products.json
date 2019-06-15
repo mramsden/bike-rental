@@ -1,6 +1,6 @@
 [
     {
-        "name": "Mountain Bike",
+        "name": "Mountain bike",
         "price": {
             "amount": 500,
             "exponent": 2,
@@ -18,7 +18,7 @@
         "description": "Planning to go slightly further? Our folding bike is ideal to take on public transport."
     },
     {
-        "name": "E-Bike",
+        "name": "E-bike",
         "price": {
             "amount": 650,
             "exponent": 2,
@@ -42,6 +42,6 @@
             "exponent": 2,
             "currency": "gbp"
         },
-        "description": "The perfect bike for your youngest family members so that everyone can join in on your ride."
+        "description": "The perfect bike for your youngest family members so that everyone can enjoy your ride."
     }
 ]

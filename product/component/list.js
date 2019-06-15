@@ -30,49 +30,43 @@ const style = `
 
 export class ProductList extends HTMLElement {
 
-    constructor() {
-        super();
-        this._products = [];
-    }
-
     get products() {
         return this._products || [];
     }
 
     set products(products) {
         this._products = products;
-        this._refreshProducts();
+
+        if (!this._shadow) { return; }
+        this._refreshProducts(this._shadow);
     }
 
     connectedCallback() {
-        this._shadow = this.attachShadow({ mode: 'closed' });
+        const shadow = this.attachShadow({ mode: 'closed' });
         const styleElement = document.createElement('style');
         styleElement.innerHTML = style;
 
-        this._shadow.appendChild(styleElement);
-        this._refreshProducts();
+        shadow.appendChild(styleElement);
+        this._refreshProducts(shadow);
+        this._shadow = shadow;
     }
 
-    _refreshProducts() {
-        if (!this._shadow) { return; }
-        this._removeAllCards();
-        this.products.forEach(product => this._attachCard(product));
+    _refreshProducts(parent) {
+        this._removeAllCards(parent);
+        const cards = this.products.map(product => this._attachCard(product));
+        parent.append(...cards);
     }
 
-    _removeAllCards() {
-        if (!this._shadow) { return; }
-        const cards = Array.from(this._shadow.querySelectorAll('product-card'));
-        cards.forEach(card => this._shadow.removeChild(card));
+    _removeAllCards(parent) {
+        const cards = Array.from(parent.querySelectorAll('product-card'));
+        cards.forEach(card => parent.removeChild(card));
     }
 
     _attachCard(product) {
-        if (!this._shadow) { return; }
-        const card = ProductCard.create();
+        const card = ProductCard.create(product);
         card.className = 'card';
-        card.name = product.name;
-        card.price = product.price;
-        card.description = product.description;
-        this._shadow.appendChild(card);
+        card.product = product;
+        return card;
     }
 };
 
