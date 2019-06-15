@@ -1,18 +1,17 @@
 import { ProductCard } from './product/card.js';
 import { ProductList } from './product/list.js';
-
-const appElement = document.getElementById('app');
+import { ProductRepository } from './product/repository.js';
 
 ProductCard.register();
 ProductList.register();
 
+const appElement = document.getElementById('app');
+
+const products = new ProductRepository();
 const productList = ProductList.create();
+
 appElement.appendChild(productList);
 
 (async function () {
-    let response = await fetch('products.json');
-    productList.products = await response.json();
-
-    response = await fetch('products.json');
-    productList.products = await response.json();
+    productList.products = await products.getAll();
 })();
